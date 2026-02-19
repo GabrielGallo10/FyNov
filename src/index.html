@@ -1,41 +1,144 @@
+<!--
+================================================================================
+FYNOV - LANDING PAGE (index.html)
+================================================================================
+
+Descrição: Página inicial/landing page da aplicação FyNov.
+           Apresenta o produto, benefícios e convida o usuário a se cadastrar.
+
+Seções:
+  - Hero: Apresentação principal com CTA
+  - Benefícios: Cards com diferenciais do produto
+  - CTA Final: Chamada para ação de cadastro
+
+Navegação:
+  - Login: ./assets/pages/login.html
+  - Cadastro: ./assets/pages/cadastro.html
+
+Dependências:
+  - Bootstrap 5.3.8
+  - Google Fonts (Outfit)
+
+@author FyNov Team
+@version 1.0.0
+================================================================================
+-->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <!-- Google Fonts - Outfit -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FyNov</title>
+    <title>FyNov - O futuro das suas finanças</title>
+    <meta name="description" content="FyNov - Controle gastos, invista com inteligência e alcance seus objetivos com uma plataforma segura e fácil de usar." />
 
-    <link rel="stylesheet" href="./assets/style/index.css" />
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+    
+    <!-- Estilos da Landing Page -->
+    <link rel="stylesheet" href="./assets/style/index.css" />
 </head>
-<body>
-    <header class="container-fluid py-1">
-        <nav class="navbar d-flex justify-content-center align-items-center">
-            <div class="logo">
-                <figure>
-                    <a href="./assets/pages/login.html">
-                        <img src="./assets/images/logo.png" alt="Logo FyNov" class="img-fluid" />
-                    </a>
-                </figure>
-            </div>
-        </nav>
-    </header>
-    <main class="container-fluid">
-        <div class="row">
-            <div class="col-12 col-lg-6 order-2 order-lg-1 p-5 d-flex flex-column align-items-center justify-content-center">
-                <h1 class="text-success slogan mb-4 text-center">O futuro das suas <strong>finanças</strong> começa agora.</h1>
-                <a href="./assets/pages/login.html" class="btn btn-warning w-50 fw-bold">COMEÇAR AGORA</a>
-            </div>
-            <figure class="col-12 col-lg-6 order-1 order-lg-2 text-center img-main">
-                <img src="./assets/images/image-main.png" alt="Mulher investindo suas finanças" class="img-fluid" />
-            </figure>
+<body class="theme-light">
+    <nav class="navbar fixed-top p-3 nav-simple">
+        <div class="container nav-container">
+            <a class="navbar-brand d-flex align-items-center" href="./index.html" aria-label="FyNov início">
+                <img src="./assets/images/logo.png" alt="Logo FyNov" class="logo-nav" />
+            </a>
+            <a href="./assets/pages/login.html" class="btn btn-outline-success btn-sm px-3">Entrar</a>
         </div>
+    </nav>
+    <main>
+        <section class="hero position-relative min-vh-100 d-flex align-items-center pt-5">
+            <div class="hero-bg position-absolute top-0 start-0 w-100 h-100" aria-hidden="true"></div>
+            <div class="container position-relative container-padding">
+                <div class="row align-items-center">
+                    <div class="col-12 col-lg-6 order-2 order-lg-1 text-center text-lg-start">
+                        <span class="badge rounded-pill px-3 py-2 mb-3 hero-badge">Fintech que simplifica sua vida</span>
+                        <h1 class="display-4 fw-bold mb-3 hero-title">
+                            O futuro das suas <strong class="hero-title-highlight">finanças</strong> começa agora.
+                        </h1>
+                        <p class="lead text-secondary mb-4 hero-subtitle">
+                            Controle gastos, invista com inteligência e alcance seus objetivos com uma plataforma segura e fácil de usar.
+                        </p>
+                        <div class="d-flex flex-column flex-sm-row gap-2 justify-content-center justify-content-lg-start">
+                            <a href="./assets/pages/cadastro.html" class="btn btn-success btn-lg px-4 fw-semibold">Começar agora</a>
+                            <a href="#beneficios" class="btn btn-outline-success btn-lg px-4">Conhecer benefícios</a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 order-1 order-lg-2 text-center py-4 py-lg-0">
+                        <img src="./assets/images/image-main.png" alt="Pessoa organizando finanças com FyNov" class="img-fluid rounded-4 hero-img" />
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="beneficios" class="py-5 bg-light">
+            <div class="container py-4 container-padding">
+                <h2 class="display-6 fw-bold text-center mb-2 text-dark">Por que escolher a FyNov?</h2>
+                <p class="lead text-center text-secondary mb-5">Tudo que você precisa para tomar controle do seu dinheiro.</p>
+                <div class="row g-4">
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="card h-100 border-0 shadow-sm benefit-card">
+                            <div class="card-body p-4">
+                                <span class="fs-2 d-block mb-3" aria-hidden="true">💳</span>
+                                <h3 class="h5 fw-semibold card-title mb-2">Controle total</h3>
+                                <p class="card-text text-secondary small mb-0">Acompanhe entradas, saídas e metas em um só lugar, em tempo real.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="card h-100 border-0 shadow-sm benefit-card">
+                            <div class="card-body p-4">
+                                <span class="fs-2 d-block mb-3" aria-hidden="true">📊</span>
+                                <h3 class="h5 fw-semibold card-title mb-2">Relatórios e Gráficos</h3>
+                                <p class="card-text text-secondary small mb-0">Visualize sua situação financeira com relatórios detalhados e gráficos interativos que facilitam a análise e o planejamento.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="card h-100 border-0 shadow-sm benefit-card">
+                            <div class="card-body p-4">
+                                <span class="fs-2 d-block mb-3" aria-hidden="true">🔒</span>
+                                <h3 class="h5 fw-semibold card-title mb-2">Segurança</h3>
+                                <p class="card-text text-secondary small mb-0">Seus dados protegidos com as melhores práticas do mercado.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="card h-100 border-0 shadow-sm benefit-card">
+                            <div class="card-body p-4">
+                                <span class="fs-2 d-block mb-3" aria-hidden="true">⚡</span>
+                                <h3 class="h5 fw-semibold card-title mb-2">Simplicidade</h3>
+                                <p class="card-text text-secondary small mb-0">Interface intuitiva para você gerenciar tudo sem complicação.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-5">
+            <div class="container container-padding">
+                <div class="card border-success border-opacity-50 bg-white text-center py-5 px-4 shadow-sm">
+                    <div class="card-body">
+                        <h2 class="h3 fw-bold mb-2 text-dark">Pronto para transformar suas finanças?</h2>
+                        <p class="text-secondary mb-4">Crie sua conta em minutos e comece hoje mesmo.</p>
+                        <a href="./assets/pages/cadastro.html" class="btn btn-success btn-lg px-4 fw-semibold">Começar agora</a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
-
+    <footer class="border-top py-4 footer-light">
+        <div class="container container-padding">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+                <img src="./assets/images/logo.png" alt="FyNov" class="footer-logo" />
+                <p class="text-secondary small mb-0">&copy; FyNov. O futuro das suas finanças.</p>
+            </div>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FyNov • Metas</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../style/common.css" />
+    <link rel="stylesheet" href="../style/metas.css" />
+</head>
+<body class="theme-light">
+
+<div class="dashboard">
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="../images/logo.png" alt="FyNov" class="sidebar-logo" />
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item" title="Resumo">
+                <i class="fas fa-chart-line"></i>
+                <span class="nav-label">Resumo</span>
+            </a>
+            <a href="recebimentos.html" class="nav-item" title="Recebimentos">
+                <i class="fas fa-money-bill-wave"></i>
+                <span class="nav-label">Recebimentos</span>
+            </a>
+            <a href="gastos.html" class="nav-item" title="Gastos">
+                <i class="fas fa-credit-card"></i>
+                <span class="nav-label">Gastos</span>
+            </a>
+            <a href="metas.html" class="nav-item active" title="Metas">
+                <i class="fas fa-bullseye"></i>
+                <span class="nav-label">Metas</span>
+            </a>
+            <a href="chatbot.html" class="nav-item" title="Assistente">
+                <i class="fas fa-robot"></i>
+                <span class="nav-label">Assistente</span>
+            </a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <h1 class="h4 fw-semibold mb-0">Metas</h1>
+            <a href="dashboard.html" class="btn btn-outline-success btn-sm">Voltar</a>
+        </header>
+
+        <div class="metas-hero">
+            <p class="metas-hero-text">Cada meta alcançada é um passo para o seu futuro. Você consegue!</p>
+        </div>
+
+        <section class="row g-4">
+            <div class="col-lg-12">
+                <div class="card metas-card-wrapper">
+                    <h5 class="mb-3"><i class="fas fa-bullseye metas-section-icon"></i> Minhas metas</h5>
+                    <div id="metas-list"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FAB Button -->
+    <button class="fab" data-bs-toggle="modal" data-bs-target="#metaModal" title="Criar nova meta">
+        <i class="fas fa-plus"></i>
+    </button>
+
+    <!-- Modal para criar meta -->
+    <div class="modal fade" id="metaModal" tabindex="-1" aria-labelledby="metaModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="metaModalLabel">Criar nova meta</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="metas-form">
+                        <div class="mb-3">
+                            <label class="form-label">Título</label>
+                            <input type="text" name="title" class="form-control" placeholder="Ex: Viagem" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Valor alvo</label>
+                            <input type="number" name="target" class="form-control" placeholder="0" step="0.01" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Prazo</label>
+                            <input type="date" name="deadline" class="form-control" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-success" onclick="document.getElementById('metas-form').dispatchEvent(new Event('submit'))">Criar meta</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Módulos JavaScript organizados -->
+<script src="../js/storage.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/charts.js"></script>
+<script src="../js/render.js"></script>
+<script src="../js/profile.js"></script>
+<script src="../js/forms.js"></script>
+<script src="../js/app.js"></script>
+</body>
+</html>

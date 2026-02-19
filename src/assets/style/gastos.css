@@ -1,0 +1,259 @@
+/* gastos.css - Estilos específicos para a página de gastos */
+
+/* Comparativo mensal */
+.page-stats {
+    margin-bottom: 24px;
+}
+
+.stats-comparison-card {
+    border-radius: var(--radius-lg);
+    padding: 22px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.stats-comparison-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+}
+
+.stats-comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 20px;
+    align-items: end;
+}
+
+.stat-block {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.stat-block--highlight {
+    text-align: right;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+}
+
+.stat-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.stat-value--danger { color: #e53935; }
+.stat-value--muted { color: var(--color-text-muted); font-weight: 600; }
+
+.stat-variation {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.stat-variation--positive { color: #00a843; }
+.stat-variation--negative { color: #c62828; }
+.stat-variation--neutral { color: var(--color-text-muted); }
+
+.stats-chart-wrap {
+    margin-top: 20px;
+    height: 180px;
+    position: relative;
+}
+
+@media (max-width: 576px) {
+    .stats-comparison-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .stat-block--highlight { grid-column: 1 / -1; text-align: left; }
+}
+
+/* Topbar */
+.gastos .topbar,
+body:has(.main-content) .topbar {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    margin-bottom: 24px;
+}
+
+/* Card da lista */
+.main-content .card {
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 28px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.main-content .card h5 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 1.25rem;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* Empty state */
+#gastos-list .text-muted.text-center {
+    padding: 48px 24px !important;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    border-radius: 12px;
+    background: var(--color-bg-soft);
+}
+
+/* Formulário (modal) */
+.form-label {
+    font-weight: 500;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+    padding: 0.65rem 0.9rem;
+    transition: var(--transition);
+}
+
+.form-control:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-soft);
+}
+
+/* Tabela de Gastos */
+.table-responsive {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.table {
+    margin-bottom: 0;
+    font-size: 0.95rem;
+}
+
+.table thead {
+    background: var(--color-bg-soft);
+}
+
+.table thead th {
+    border: none;
+    color: var(--color-text);
+    font-weight: 600;
+    padding: 16px 18px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.table tbody tr {
+    border-color: rgba(0, 0, 0, 0.06);
+    transition: var(--transition);
+}
+
+.table tbody tr:hover {
+    background: var(--color-primary-soft);
+}
+
+.table tbody td {
+    vertical-align: middle;
+    padding: 14px 18px;
+    color: var(--color-text);
+}
+
+.table tbody td:last-child {
+    text-align: center;
+}
+
+.table tbody td strong {
+    color: #e53935;
+    font-weight: 600;
+}
+
+.badge {
+    font-size: 0.78rem;
+    padding: 0.35rem 0.75rem;
+    font-weight: 500;
+    border-radius: 8px;
+}
+
+.badge.bg-primary {
+    background-color: rgba(255, 82, 82, 0.12) !important;
+    color: #c62828;
+}
+
+.btn-outline-danger {
+    border: 1px solid rgba(229, 57, 53, 0.5);
+    color: #e53935;
+    padding: 0.4rem 0.75rem;
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.btn-outline-danger:hover {
+    background: rgba(229, 57, 53, 0.1);
+    border-color: #e53935;
+    color: #e53935;
+}
+
+/* FAB na página de gastos */
+.fab {
+    background: linear-gradient(135deg, #e53935, #c62828);
+    box-shadow: 0 6px 20px rgba(229, 57, 53, 0.35);
+}
+
+.fab:hover {
+    box-shadow: 0 8px 28px rgba(229, 57, 53, 0.45);
+}
+
+/* Modal */
+#gastoModal .modal-content {
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+}
+
+#gastoModal .modal-header {
+    background: var(--color-bg-soft);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+#gastoModal .modal-title {
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .main-content .card {
+        padding: 20px;
+    }
+
+    .table thead th,
+    .table tbody td {
+        padding: 12px 14px;
+    }
+
+    .table {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content .card h5 {
+        font-size: 1rem;
+    }
+
+    .table th:nth-child(2),
+    .table td:nth-child(2) {
+        display: none;
+    }
+
+    .table tbody td strong {
+        font-size: 0.9rem;
+    }
+}

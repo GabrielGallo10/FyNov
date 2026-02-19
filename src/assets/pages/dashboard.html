@@ -1,0 +1,255 @@
+<!--
+================================================================================
+FYNOV - PÁGINA DASHBOARD (dashboard.html)
+================================================================================
+
+Descrição: Página principal do sistema que exibe um resumo financeiro completo
+           do usuário, incluindo saldo, gráficos e metas.
+
+Seções principais:
+  - Cards de resumo (Saldo, Recebimentos, Gastos)
+  - Metas quase concluídas
+  - Gráficos de recebimentos e gastos mensais
+  - Gráficos de evolução financeira e distribuição de gastos
+  - Principais metas
+
+Dependências:
+  - Bootstrap 5.3.8 (CSS e JS)
+  - Chart.js 4.4.0 (Gráficos)
+  - Font Awesome 6.4.0 (Ícones via common.css)
+  - Módulos JavaScript: storage, utils, charts, render, profile, forms, app
+
+@author FyNov Team
+@version 1.0.0
+================================================================================
+-->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FyNov - Dashboard</title>
+
+    <!-- Google Fonts - Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+    
+    <!-- Estilos da aplicação -->
+    <link rel="stylesheet" href="../style/common.css" />
+    <link rel="stylesheet" href="../style/dashboard.css" />
+</head>
+
+<body class="theme-light">
+
+<!-- Container principal com layout sidebar + conteúdo -->
+<div class="dashboard">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="../images/logo.png" alt="FyNov" class="sidebar-logo" />
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item active" title="Resumo">
+                <i class="fas fa-chart-line"></i>
+                <span class="nav-label">Resumo</span>
+            </a>
+            <a href="recebimentos.html" class="nav-item" title="Recebimentos">
+                <i class="fas fa-money-bill-wave"></i>
+                <span class="nav-label">Recebimentos</span>
+            </a>
+            <a href="gastos.html" class="nav-item" title="Gastos">
+                <i class="fas fa-credit-card"></i>
+                <span class="nav-label">Gastos</span>
+            </a>
+            <a href="metas.html" class="nav-item" title="Metas">
+                <i class="fas fa-bullseye"></i>
+                <span class="nav-label">Metas</span>
+            </a>
+            <a href="chatbot.html" class="nav-item" title="Assistente">
+                <i class="fas fa-robot"></i>
+                <span class="nav-label">Assistente</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Conteúdo -->
+    <main class="main-content">
+
+        <!-- Topbar -->
+        <header class="topbar">
+            <h1 class="h4 fw-semibold mb-0">Resumo Financeiro</h1>
+            <div class="topbar-profile">
+                <div class="dropdown">
+                    <button class="profile-trigger btn btn-link dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="profile-avatar" id="profile-avatar-initial">U</span>
+                        <span class="profile-name" id="profile-name-topbar">Perfil</span>
+                        <i class="fas fa-chevron-down profile-chevron"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end profile-dropdown" aria-labelledby="profileDropdown">
+                        <li class="profile-dropdown-header">
+                            <span class="profile-avatar profile-avatar--lg" id="profile-avatar-dropdown">U</span>
+                            <div class="profile-dropdown-info">
+                                <strong id="profile-name-dropdown">Usuário</strong>
+                                <span class="text-muted small" id="profile-email-dropdown">email@exemplo.com</span>
+                            </div>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item profile-dropdown-item" href="perfil.html">
+                                <i class="fas fa-user-edit"></i> Meu perfil
+                            </a>
+                        </li>
+                        <li>
+                            <button class="dropdown-item profile-dropdown-item profile-dropdown-item--sair" type="button" id="btn-sair">
+                                <i class="fas fa-sign-out-alt"></i> Sair
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <!-- Modal Perfil -->
+        <div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="perfilModalLabel"><i class="fas fa-user-circle me-2"></i>Meu perfil</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="perfil-form">
+                            <div class="mb-3">
+                                <label for="perfil-nome" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="perfil-nome" name="nome" placeholder="Seu nome" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="perfil-email" class="form-label">E-mail</label>
+                                <input type="email" class="form-control" id="perfil-email" name="email" placeholder="seu@email.com" required>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">
+                                <i class="fas fa-save me-2"></i>Salvar alterações
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cards resumo -->
+        <section class="row g-4 mb-4">
+            <div class="col-md-4">
+                <div class="card summary-card">
+                    <span>Saldo Atual</span>
+                    <h3 id="dashboard-saldo">R$ 0,00</h3>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card summary-card">
+                    <span>Recebimentos <span class="summary-badge" id="dashboard-recebimentos-badge"></span></span>
+                    <h3 class="text-success" id="dashboard-recebimentos">R$ 0,00</h3>
+                    <p class="summary-comparison" id="dashboard-recebimentos-comparison"></p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card summary-card">
+                    <span>Gastos <span class="summary-badge" id="dashboard-gastos-badge"></span></span>
+                    <h3 class="text-danger" id="dashboard-gastos">R$ 0,00</h3>
+                    <p class="summary-comparison" id="dashboard-gastos-comparison"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Metas quase lá -->
+        <section class="metas-quase-la mb-4" id="metas-quase-la-container">
+            <h5 class="section-title">Metas quase lá</h5>
+            <div class="row g-4" id="metas-quase-la"></div>
+        </section>
+
+        <!-- Gráficos: Recebimentos e Gastos -->
+        <section class="row g-4 mb-4">
+            <div class="col-lg-6">
+                <div class="card graph-card">
+                    <h5 class="mb-3">Recebimentos — últimos meses</h5>
+                    <div class="graph-placeholder graph-placeholder--sm">
+                        <canvas id="recebimentosChart" style="width:100%;height:220px"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card graph-card">
+                    <h5 class="mb-3">Gastos — últimos meses</h5>
+                    <div class="graph-placeholder graph-placeholder--sm">
+                        <canvas id="gastosMesesChart" style="width:100%;height:220px"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gráficos: Evolução e Distribuição -->
+        <section class="row g-4 mb-4">
+            <div class="col-lg-8">
+                <div class="card graph-card">
+                    <h5 class="mb-3">Evolução Financeira</h5>
+                    <div class="graph-placeholder">
+                        <canvas id="evolucaoChart" style="width:100%;height:260px"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card graph-card">
+                    <h5 class="mb-3">Distribuição de Gastos</h5>
+                    <div class="graph-placeholder">
+                        <canvas id="distribuicaoChart" style="width:100%;height:260px"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Principais Metas -->
+        <section class="principais-metas" id="principais-metas-container">
+            <div class="section-header-row">
+                <h5 class="section-title"><i class="fas fa-bullseye me-2"></i>Minhas Metas</h5>
+                <a href="metas.html" class="section-link">Ver todas <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="row g-4" id="principais-metas"></div>
+        </section>
+
+    </main>
+</div>
+
+<!-- ========================================================================
+     SCRIPTS
+     ======================================================================== -->
+
+<!-- Bibliotecas externas -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<!-- 
+     Módulos JavaScript da aplicação
+     IMPORTANTE: A ordem de carregamento é crucial!
+     1. storage.js  - Funções de persistência (base)
+     2. utils.js    - Funções utilitárias
+     3. charts.js   - Gráficos (depende de utils)
+     4. render.js   - Renderização (depende de storage e utils)
+     5. profile.js  - Perfil do usuário
+     6. forms.js    - Formulários (depende de storage e render)
+     7. app.js      - Inicialização (coordena todos)
+-->
+<script src="../js/storage.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/charts.js"></script>
+<script src="../js/render.js"></script>
+<script src="../js/profile.js"></script>
+<script src="../js/forms.js"></script>
+<script src="../js/app.js"></script>
+
+</body>
+</html>

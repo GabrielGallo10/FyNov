@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FyNov - Meu Perfil</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../style/common.css" />
+    <link rel="stylesheet" href="../style/perfil.css" />
+</head>
+<body class="theme-light">
+
+<div class="dashboard">
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="../images/logo.png" alt="FyNov" class="sidebar-logo" />
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item" title="Resumo">
+                <i class="fas fa-chart-line"></i>
+                <span class="nav-label">Resumo</span>
+            </a>
+            <a href="recebimentos.html" class="nav-item" title="Recebimentos">
+                <i class="fas fa-money-bill-wave"></i>
+                <span class="nav-label">Recebimentos</span>
+            </a>
+            <a href="gastos.html" class="nav-item" title="Gastos">
+                <i class="fas fa-credit-card"></i>
+                <span class="nav-label">Gastos</span>
+            </a>
+            <a href="metas.html" class="nav-item" title="Metas">
+                <i class="fas fa-bullseye"></i>
+                <span class="nav-label">Metas</span>
+            </a>
+            <a href="chatbot.html" class="nav-item" title="Assistente">
+                <i class="fas fa-robot"></i>
+                <span class="nav-label">Assistente</span>
+            </a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <h1 class="h4 fw-semibold mb-0">Meu Perfil</h1>
+            <a href="dashboard.html" class="btn btn-outline-success btn-sm">
+                <i class="fas fa-arrow-left me-1"></i> Voltar
+            </a>
+        </header>
+
+        <div class="perfil-container">
+            <!-- Header do Perfil -->
+            <div class="perfil-header">
+                <div class="perfil-avatar-section">
+                    <div class="perfil-avatar" id="perfil-avatar-large">U</div>
+                    <div class="perfil-avatar-info">
+                        <h2 class="perfil-nome" id="perfil-display-nome">Usuário</h2>
+                        <p class="perfil-email" id="perfil-display-email">email@exemplo.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formulário de Edição -->
+            <div class="perfil-form-section">
+                <div class="perfil-section-header">
+                    <h3><i class="fas fa-user-edit me-2"></i>Informações Pessoais</h3>
+                    <p class="perfil-section-subtitle">Atualize suas informações de perfil</p>
+                </div>
+
+                <form id="perfil-edit-form" class="perfil-form">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="perfil-nome-input" class="form-label">
+                                    <i class="fas fa-user"></i> Nome completo
+                                </label>
+                                <input 
+                                    type="text" 
+                                    class="form-control form-control-lg" 
+                                    id="perfil-nome-input" 
+                                    name="nome" 
+                                    placeholder="Seu nome completo"
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="perfil-email-input" class="form-label">
+                                    <i class="fas fa-envelope"></i> E-mail
+                                </label>
+                                <input 
+                                    type="email" 
+                                    class="form-control form-control-lg" 
+                                    id="perfil-email-input" 
+                                    name="email" 
+                                    placeholder="seu@email.com"
+                                    required
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="perfil-form-actions">
+                        <button type="submit" class="btn btn-success btn-lg">
+                            <i class="fas fa-save me-2"></i>Salvar alterações
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Seção de Estatísticas -->
+            <div class="perfil-stats-section">
+                <div class="perfil-section-header">
+                    <h3><i class="fas fa-chart-bar me-2"></i>Resumo da Conta</h3>
+                    <p class="perfil-section-subtitle">Visão geral da sua atividade financeira</p>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="perfil-stat-card">
+                            <div class="perfil-stat-icon perfil-stat-icon--success">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <div class="perfil-stat-info">
+                                <span class="perfil-stat-label">Total de Recebimentos</span>
+                                <span class="perfil-stat-value" id="stat-total-recebimentos">R$ 0,00</span>
+                                <span class="perfil-stat-count" id="stat-count-recebimentos">0 registros</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="perfil-stat-card">
+                            <div class="perfil-stat-icon perfil-stat-icon--danger">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div class="perfil-stat-info">
+                                <span class="perfil-stat-label">Total de Gastos</span>
+                                <span class="perfil-stat-value" id="stat-total-gastos">R$ 0,00</span>
+                                <span class="perfil-stat-count" id="stat-count-gastos">0 registros</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="perfil-stat-card">
+                            <div class="perfil-stat-icon perfil-stat-icon--primary">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <div class="perfil-stat-info">
+                                <span class="perfil-stat-label">Metas Criadas</span>
+                                <span class="perfil-stat-value" id="stat-total-metas">0</span>
+                                <span class="perfil-stat-count" id="stat-metas-concluidas">0 concluídas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ações da Conta -->
+            <div class="perfil-actions-section">
+                <div class="perfil-section-header">
+                    <h3><i class="fas fa-cog me-2"></i>Ações da Conta</h3>
+                </div>
+
+                <div class="perfil-actions-list">
+                    <button class="perfil-action-btn perfil-action-btn--danger" onclick="confirmClearData()">
+                        <i class="fas fa-trash-alt"></i>
+                        <div class="perfil-action-info">
+                            <span class="perfil-action-title">Limpar todos os dados</span>
+                            <span class="perfil-action-desc">Remove todos os recebimentos, gastos e metas</span>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <button class="perfil-action-btn perfil-action-btn--warning" onclick="confirmLogout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <div class="perfil-action-info">
+                            <span class="perfil-action-title">Sair da conta</span>
+                            <span class="perfil-action-desc">Encerrar sessão e voltar para o login</span>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/storage.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/profile.js"></script>
+<script>
+// Carregar dados do perfil
+function loadProfilePage() {
+    const profile = getProfile();
+    
+    // Atualizar display
+    document.getElementById('perfil-avatar-large').textContent = getInitial(profile.nome);
+    document.getElementById('perfil-display-nome').textContent = profile.nome || 'Usuário';
+    document.getElementById('perfil-display-email').textContent = profile.email || 'email@exemplo.com';
+    
+    // Preencher formulário
+    document.getElementById('perfil-nome-input').value = profile.nome || '';
+    document.getElementById('perfil-email-input').value = profile.email || '';
+    
+    // Carregar estatísticas
+    loadProfileStats();
+}
+
+function loadProfileStats() {
+    const recebimentos = getItems('recebimentos');
+    const gastos = getItems('gastos');
+    const metas = getItems('metas');
+    
+    // Total de recebimentos
+    const totalRecebimentos = recebimentos.reduce((sum, r) => sum + Number(r.amount || 0), 0);
+    document.getElementById('stat-total-recebimentos').textContent = formatCurrency(totalRecebimentos);
+    document.getElementById('stat-count-recebimentos').textContent = `${recebimentos.length} registro${recebimentos.length !== 1 ? 's' : ''}`;
+    
+    // Total de gastos
+    const totalGastos = gastos.reduce((sum, g) => sum + Number(g.amount || 0), 0);
+    document.getElementById('stat-total-gastos').textContent = formatCurrency(totalGastos);
+    document.getElementById('stat-count-gastos').textContent = `${gastos.length} registro${gastos.length !== 1 ? 's' : ''}`;
+    
+    // Metas
+    const metasConcluidas = metas.filter(m => {
+        const pct = m.current && m.target ? Math.round((m.current / m.target) * 100) : 0;
+        return pct >= 100;
+    }).length;
+    document.getElementById('stat-total-metas').textContent = metas.length;
+    document.getElementById('stat-metas-concluidas').textContent = `${metasConcluidas} concluída${metasConcluidas !== 1 ? 's' : ''}`;
+}
+
+// Salvar perfil
+document.getElementById('perfil-edit-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const nome = document.getElementById('perfil-nome-input').value.trim();
+    const email = document.getElementById('perfil-email-input').value.trim();
+    
+    if (!nome || !email) {
+        alert('Preencha todos os campos.');
+        return;
+    }
+    
+    saveProfile({ nome, email });
+    loadProfilePage();
+    
+    // Mostrar feedback
+    const btn = this.querySelector('button[type="submit"]');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-check me-2"></i>Salvo com sucesso!';
+    btn.classList.add('btn-success-saved');
+    
+    setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.classList.remove('btn-success-saved');
+    }, 2000);
+});
+
+function confirmClearData() {
+    if (confirm('Tem certeza que deseja limpar todos os dados? Esta ação não pode ser desfeita.\n\nIsso irá remover:\n- Todos os recebimentos\n- Todos os gastos\n- Todas as metas')) {
+        localStorage.removeItem('recebimentos');
+        localStorage.removeItem('gastos');
+        localStorage.removeItem('metas');
+        loadProfileStats();
+        alert('Todos os dados foram removidos.');
+    }
+}
+
+function confirmLogout() {
+    if (confirm('Deseja realmente sair da sua conta?')) {
+        window.location.href = 'login.html';
+    }
+}
+
+// Inicializar
+document.addEventListener('DOMContentLoaded', loadProfilePage);
+</script>
+</body>
+</html>

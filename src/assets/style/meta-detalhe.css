@@ -1,0 +1,315 @@
+/* meta-detalhe.css - Estilos da página de detalhes da meta */
+
+.meta-detalhe-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.meta-not-found {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.meta-not-found i {
+    font-size: 4rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+}
+
+.meta-not-found h2 {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.meta-not-found p {
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+}
+
+/* Header */
+.meta-detalhe-header {
+    margin-bottom: 2rem;
+}
+
+.meta-detalhe-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.meta-detalhe-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0;
+}
+
+.meta-detalhe-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.meta-motivacao {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    background: var(--color-bg-soft);
+    border-radius: 12px;
+}
+
+/* Progress Section */
+.meta-detalhe-progress-section {
+    background: var(--color-surface);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.meta-detalhe-progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.meta-detalhe-progress-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.meta-detalhe-progress-pct {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.meta-detalhe-progress-bar {
+    height: 16px;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.meta-detalhe-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-primary), #00e676);
+    border-radius: 12px;
+    transition: width 0.8s ease;
+}
+
+.meta-detalhe-progress-values {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.meta-detalhe-current {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.meta-detalhe-target {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+}
+
+/* Stat Cards */
+.meta-stat-card {
+    background: var(--color-surface);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    transition: var(--transition);
+}
+
+.meta-stat-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.meta-stat-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.meta-stat-icon--primary {
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
+}
+
+.meta-stat-icon--success {
+    background: rgba(0, 200, 83, 0.15);
+    color: #00a843;
+}
+
+.meta-stat-icon--warning {
+    background: rgba(255, 193, 7, 0.15);
+    color: #f59f00;
+}
+
+.meta-stat-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.meta-stat-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.meta-stat-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text);
+}
+
+/* Deadline Card */
+.meta-deadline-card {
+    background: var(--color-surface);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.meta-deadline-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    background: rgba(29, 78, 216, 0.1);
+    color: #1d4ed8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.meta-deadline-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.meta-deadline-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.meta-deadline-date {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.meta-deadline-days {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-primary);
+    margin-top: 2px;
+}
+
+/* Actions Section */
+.meta-actions-section {
+    text-align: center;
+}
+
+.meta-action-btn {
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    border-radius: 14px;
+    box-shadow: 0 4px 16px rgba(0, 200, 83, 0.3);
+}
+
+.meta-action-btn:hover {
+    box-shadow: 0 8px 24px rgba(0, 200, 83, 0.4);
+    transform: translateY(-2px);
+}
+
+.meta-action-btn i {
+    margin-right: 8px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .meta-detalhe-title-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .meta-detalhe-title {
+        font-size: 1.5rem;
+    }
+    
+    .meta-detalhe-progress-section {
+        padding: 1.5rem;
+    }
+    
+    .meta-detalhe-progress-pct {
+        font-size: 1.5rem;
+    }
+    
+    .meta-detalhe-current {
+        font-size: 1.25rem;
+    }
+    
+    .meta-stat-card {
+        padding: 1rem;
+    }
+    
+    .meta-stat-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 1.1rem;
+    }
+    
+    .meta-stat-value {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .meta-detalhe-actions {
+        width: 100%;
+    }
+    
+    .meta-detalhe-actions .btn {
+        flex: 1;
+    }
+    
+    .meta-action-btn {
+        width: 100%;
+    }
+}

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FyNov - Detalhes da Meta</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../style/common.css" />
+    <link rel="stylesheet" href="../style/meta-detalhe.css" />
+</head>
+<body class="theme-light">
+
+<div class="dashboard">
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="../images/logo.png" alt="FyNov" class="sidebar-logo" />
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item" title="Resumo">
+                <i class="fas fa-chart-line"></i>
+                <span class="nav-label">Resumo</span>
+            </a>
+            <a href="recebimentos.html" class="nav-item" title="Recebimentos">
+                <i class="fas fa-money-bill-wave"></i>
+                <span class="nav-label">Recebimentos</span>
+            </a>
+            <a href="gastos.html" class="nav-item" title="Gastos">
+                <i class="fas fa-credit-card"></i>
+                <span class="nav-label">Gastos</span>
+            </a>
+            <a href="metas.html" class="nav-item active" title="Metas">
+                <i class="fas fa-bullseye"></i>
+                <span class="nav-label">Metas</span>
+            </a>
+            <a href="chatbot.html" class="nav-item" title="Assistente">
+                <i class="fas fa-robot"></i>
+                <span class="nav-label">Assistente</span>
+            </a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <a href="metas.html" class="btn btn-outline-secondary btn-sm">
+                <i class="fas fa-arrow-left me-1"></i> Voltar para Metas
+            </a>
+        </header>
+
+        <div class="meta-detalhe-container" id="meta-detalhe-container">
+            <!-- Conteúdo carregado via JavaScript -->
+        </div>
+
+    </main>
+</div>
+
+<!-- Modal para adicionar valor -->
+<div class="modal fade" id="adicionarValorModal" tabindex="-1" aria-labelledby="adicionarValorModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="adicionarValorModalLabel">
+                    <i class="fas fa-plus-circle me-2"></i>Adicionar valor à meta
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+                <form id="adicionar-valor-form">
+                    <div class="mb-3">
+                        <label for="valor-adicionar" class="form-label">Valor a adicionar</label>
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-text">R$</span>
+                            <input type="text" class="form-control" id="valor-adicionar" name="valor" placeholder="0,00" required />
+                        </div>
+                        <div class="form-text">Digite o valor que deseja adicionar ao progresso desta meta.</div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success" onclick="submitAddValue()">
+                    <i class="fas fa-check me-1"></i>Adicionar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para editar meta -->
+<div class="modal fade" id="editarMetaModal" tabindex="-1" aria-labelledby="editarMetaModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editarMetaModalLabel">
+                    <i class="fas fa-edit me-2"></i>Editar meta
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editar-meta-form">
+                    <div class="mb-3">
+                        <label for="edit-meta-title" class="form-label">Título da meta</label>
+                        <input type="text" class="form-control" id="edit-meta-title" name="title" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-meta-target" class="form-label">Valor alvo</label>
+                        <div class="input-group">
+                            <span class="input-group-text">R$</span>
+                            <input type="text" class="form-control" id="edit-meta-target" name="target" required />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-meta-current" class="form-label">Valor atual</label>
+                        <div class="input-group">
+                            <span class="input-group-text">R$</span>
+                            <input type="text" class="form-control" id="edit-meta-current" name="current" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-meta-deadline" class="form-label">Prazo</label>
+                        <input type="date" class="form-control" id="edit-meta-deadline" name="deadline" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success" onclick="submitEditMeta()">
+                    <i class="fas fa-save me-1"></i>Salvar alterações
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/storage.js"></script>
+<script src="../js/utils.js"></script>
+<script>
+let currentMetaId = null;
+
+function getMetaIdFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('id');
+}
+
+function loadMetaDetails() {
+    const id = getMetaIdFromUrl();
+    if (!id) {
+        window.location.href = 'metas.html';
+        return;
+    }
+    
+    currentMetaId = id;
+    const meta = getItemById('metas', id);
+    
+    if (!meta) {
+        document.getElementById('meta-detalhe-container').innerHTML = `
+            <div class="meta-not-found">
+                <i class="fas fa-exclamation-circle"></i>
+                <h2>Meta não encontrada</h2>
+                <p>A meta que você está procurando não existe ou foi removida.</p>
+                <a href="metas.html" class="btn btn-success">Voltar para Metas</a>
+            </div>
+        `;
+        return;
+    }
+    
+    renderMetaDetails(meta);
+}
+
+function renderMetaDetails(meta) {
+    const pct = meta.current && meta.target ? Math.min(100, Math.round((meta.current / meta.target) * 100)) : 0;
+    const remaining = Math.max(0, meta.target - (meta.current || 0));
+    const deadlineText = meta.deadline ? new Date(meta.deadline).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' }) : 'Sem prazo definido';
+    
+    // Calcular dias restantes
+    let daysRemaining = null;
+    let daysText = '';
+    if (meta.deadline) {
+        const today = new Date();
+        const deadline = new Date(meta.deadline);
+        daysRemaining = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
+        if (daysRemaining > 0) {
+            daysText = `${daysRemaining} dias restantes`;
+        } else if (daysRemaining === 0) {
+            daysText = 'Último dia!';
+        } else {
+            daysText = 'Prazo vencido';
+        }
+    }
+    
+    // Mensagem motivacional
+    let motivacao = { msg: 'Você consegue!', icon: 'fa-hand-point-right', color: 'text-primary' };
+    if (pct >= 100) motivacao = { msg: 'Parabéns! Meta conquistada!', icon: 'fa-trophy', color: 'text-warning' };
+    else if (pct >= 80) motivacao = { msg: 'Quase lá! Última reta!', icon: 'fa-fire', color: 'text-danger' };
+    else if (pct >= 50) motivacao = { msg: 'Bom ritmo! Continue assim!', icon: 'fa-star', color: 'text-success' };
+    else if (pct >= 25) motivacao = { msg: 'Bom começo! Mantenha o foco!', icon: 'fa-seedling', color: 'text-success' };
+    
+    document.getElementById('meta-detalhe-container').innerHTML = `
+        <div class="meta-detalhe-header">
+            <div class="meta-detalhe-title-row">
+                <h1 class="meta-detalhe-title">${escapeHtml(meta.title)}</h1>
+                <div class="meta-detalhe-actions">
+                    <button class="btn btn-outline-primary btn-sm" onclick="openEditModal()">
+                        <i class="fas fa-edit"></i> Editar
+                    </button>
+                    <button class="btn btn-outline-danger btn-sm" onclick="confirmDeleteMeta()">
+                        <i class="fas fa-trash"></i> Excluir
+                    </button>
+                </div>
+            </div>
+            <div class="meta-motivacao ${motivacao.color}">
+                <i class="fas ${motivacao.icon}"></i> ${motivacao.msg}
+            </div>
+        </div>
+        
+        <div class="meta-detalhe-progress-section">
+            <div class="meta-detalhe-progress-header">
+                <span class="meta-detalhe-progress-label">Progresso</span>
+                <span class="meta-detalhe-progress-pct">${pct}%</span>
+            </div>
+            <div class="meta-detalhe-progress-bar">
+                <div class="meta-detalhe-progress-fill" style="width: ${pct}%"></div>
+            </div>
+            <div class="meta-detalhe-progress-values">
+                <span class="meta-detalhe-current">${formatCurrency(meta.current || 0)}</span>
+                <span class="meta-detalhe-target">de ${formatCurrency(meta.target)}</span>
+            </div>
+        </div>
+        
+        <div class="row g-4 mb-4">
+            <div class="col-md-4">
+                <div class="meta-stat-card">
+                    <div class="meta-stat-icon meta-stat-icon--primary">
+                        <i class="fas fa-flag-checkered"></i>
+                    </div>
+                    <div class="meta-stat-info">
+                        <span class="meta-stat-label">Valor Alvo</span>
+                        <span class="meta-stat-value">${formatCurrency(meta.target)}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="meta-stat-card">
+                    <div class="meta-stat-icon meta-stat-icon--success">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <div class="meta-stat-info">
+                        <span class="meta-stat-label">Valor Atual</span>
+                        <span class="meta-stat-value">${formatCurrency(meta.current || 0)}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="meta-stat-card">
+                    <div class="meta-stat-icon meta-stat-icon--warning">
+                        <i class="fas fa-hourglass-half"></i>
+                    </div>
+                    <div class="meta-stat-info">
+                        <span class="meta-stat-label">Falta</span>
+                        <span class="meta-stat-value">${formatCurrency(remaining)}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="meta-deadline-card">
+            <div class="meta-deadline-icon">
+                <i class="fas fa-calendar-alt"></i>
+            </div>
+            <div class="meta-deadline-info">
+                <span class="meta-deadline-label">Prazo</span>
+                <span class="meta-deadline-date">${deadlineText}</span>
+                ${daysText ? `<span class="meta-deadline-days ${daysRemaining <= 7 ? 'text-danger' : ''}">${daysText}</span>` : ''}
+            </div>
+        </div>
+        
+        <div class="meta-actions-section">
+            <button class="btn btn-success btn-lg meta-action-btn" data-bs-toggle="modal" data-bs-target="#adicionarValorModal">
+                <i class="fas fa-plus-circle"></i>
+                Adicionar valor
+            </button>
+        </div>
+    `;
+}
+
+function openEditModal() {
+    const meta = getItemById('metas', currentMetaId);
+    if (!meta) return;
+    
+    document.getElementById('edit-meta-title').value = meta.title || '';
+    document.getElementById('edit-meta-target').value = meta.target || '';
+    document.getElementById('edit-meta-current').value = meta.current || '';
+    document.getElementById('edit-meta-deadline').value = meta.deadline || '';
+    
+    const modal = new bootstrap.Modal(document.getElementById('editarMetaModal'));
+    modal.show();
+}
+
+function submitAddValue() {
+    const input = document.getElementById('valor-adicionar');
+    const valor = parseFloat((input.value || '0').replace(',', '.'));
+    
+    if (!valor || valor <= 0) {
+        alert('Digite um valor válido.');
+        return;
+    }
+    
+    const meta = getItemById('metas', currentMetaId);
+    if (!meta) return;
+    
+    const newCurrent = (meta.current || 0) + valor;
+    updateItem('metas', currentMetaId, { current: newCurrent });
+    
+    // Fechar modal e recarregar
+    const modal = bootstrap.Modal.getInstance(document.getElementById('adicionarValorModal'));
+    if (modal) modal.hide();
+    
+    input.value = '';
+    loadMetaDetails();
+}
+
+function submitEditMeta() {
+    const title = document.getElementById('edit-meta-title').value.trim();
+    const target = parseFloat((document.getElementById('edit-meta-target').value || '0').replace(',', '.'));
+    const current = parseFloat((document.getElementById('edit-meta-current').value || '0').replace(',', '.'));
+    const deadline = document.getElementById('edit-meta-deadline').value;
+    
+    if (!title || !target) {
+        alert('Preencha título e valor alvo.');
+        return;
+    }
+    
+    updateItem('metas', currentMetaId, { title, target, current, deadline });
+    
+    // Fechar modal e recarregar
+    const modal = bootstrap.Modal.getInstance(document.getElementById('editarMetaModal'));
+    if (modal) modal.hide();
+    
+    loadMetaDetails();
+}
+
+function confirmDeleteMeta() {
+    if (confirm('Tem certeza que deseja excluir esta meta? Esta ação não pode ser desfeita.')) {
+        deleteItem('metas', currentMetaId);
+        window.location.href = 'metas.html';
+    }
+}
+
+// Inicializar
+document.addEventListener('DOMContentLoaded', loadMetaDetails);
+</script>
+</body>
+</html>

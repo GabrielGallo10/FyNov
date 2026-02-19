@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FyNov - Assistente Financeiro</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../style/common.css" />
+    <link rel="stylesheet" href="../style/chatbot.css" />
+</head>
+<body class="theme-light">
+
+<div class="dashboard">
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="../images/logo.png" alt="FyNov" class="sidebar-logo" />
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item" title="Resumo">
+                <i class="fas fa-chart-line"></i>
+                <span class="nav-label">Resumo</span>
+            </a>
+            <a href="recebimentos.html" class="nav-item" title="Recebimentos">
+                <i class="fas fa-money-bill-wave"></i>
+                <span class="nav-label">Recebimentos</span>
+            </a>
+            <a href="gastos.html" class="nav-item" title="Gastos">
+                <i class="fas fa-credit-card"></i>
+                <span class="nav-label">Gastos</span>
+            </a>
+            <a href="metas.html" class="nav-item" title="Metas">
+                <i class="fas fa-bullseye"></i>
+                <span class="nav-label">Metas</span>
+            </a>
+            <a href="chatbot.html" class="nav-item active" title="Assistente">
+                <i class="fas fa-robot"></i>
+                <span class="nav-label">Assistente</span>
+            </a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <h1 class="h4 fw-semibold mb-0">Assistente Financeiro</h1>
+            <a href="dashboard.html" class="btn btn-outline-success btn-sm">Voltar</a>
+        </header>
+
+        <div class="chatbot-container">
+            <div class="chatbot-welcome">
+                <div class="chatbot-avatar-large">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h2 class="chatbot-welcome-title">Olá! Sou seu assistente financeiro</h2>
+                <p class="chatbot-welcome-text">
+                    Posso te ajudar a entender melhor suas finanças, dar dicas de economia, 
+                    responder dúvidas sobre investimentos e muito mais!
+                </p>
+            </div>
+
+            <div class="chat-messages" id="chat-messages">
+                <div class="chat-message chat-message--bot">
+                    <div class="chat-message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="chat-message-content">
+                        <p>Olá! Como posso te ajudar hoje com suas finanças? 😊</p>
+                        <span class="chat-message-time">Agora</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-suggestions">
+                <span class="chat-suggestions-label">Sugestões:</span>
+                <div class="chat-suggestions-list">
+                    <button class="chat-suggestion-btn" onclick="sendSuggestion('Como economizar dinheiro?')">
+                        <i class="fas fa-piggy-bank"></i> Como economizar?
+                    </button>
+                    <button class="chat-suggestion-btn" onclick="sendSuggestion('Analise meus gastos')">
+                        <i class="fas fa-chart-pie"></i> Analisar gastos
+                    </button>
+                    <button class="chat-suggestion-btn" onclick="sendSuggestion('Dicas de investimento')">
+                        <i class="fas fa-coins"></i> Dicas de investimento
+                    </button>
+                    <button class="chat-suggestion-btn" onclick="sendSuggestion('Como criar um orçamento?')">
+                        <i class="fas fa-calculator"></i> Criar orçamento
+                    </button>
+                </div>
+            </div>
+
+            <div class="chat-input-container">
+                <form id="chat-form" class="chat-input-form">
+                    <div class="chat-input-wrapper">
+                        <input 
+                            type="text" 
+                            id="chat-input" 
+                            class="chat-input" 
+                            placeholder="Digite sua mensagem..." 
+                            autocomplete="off"
+                        />
+                        <button type="submit" class="chat-send-btn" title="Enviar mensagem">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </form>
+                <p class="chat-disclaimer">
+                    <i class="fas fa-info-circle"></i>
+                    O assistente fornece orientações gerais. Para decisões importantes, consulte um profissional.
+                </p>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// Funções básicas de UI do chat (sem lógica de chatbot real)
+function sendSuggestion(text) {
+    const input = document.getElementById('chat-input');
+    input.value = text;
+    input.focus();
+}
+
+document.getElementById('chat-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const input = document.getElementById('chat-input');
+    const message = input.value.trim();
+    if (!message) return;
+    
+    // Adiciona mensagem do usuário
+    addMessage(message, 'user');
+    input.value = '';
+    
+    // Simula resposta do bot (placeholder)
+    setTimeout(() => {
+        addMessage('Esta é uma demonstração. Em breve, terei inteligência artificial para te ajudar com suas finanças! 🚀', 'bot');
+    }, 1000);
+});
+
+function addMessage(text, type) {
+    const container = document.getElementById('chat-messages');
+    const time = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `chat-message chat-message--${type}`;
+    messageDiv.innerHTML = `
+        <div class="chat-message-avatar">
+            <i class="fas fa-${type === 'bot' ? 'robot' : 'user'}"></i>
+        </div>
+        <div class="chat-message-content">
+            <p>${text}</p>
+            <span class="chat-message-time">${time}</span>
+        </div>
+    `;
+    
+    container.appendChild(messageDiv);
+    container.scrollTop = container.scrollHeight;
+}
+</script>
+</body>
+</html>
